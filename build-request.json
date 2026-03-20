@@ -1,0 +1,61 @@
+{
+  "kind": "build_request",
+  "title": "Open well-known paths for custom domain DNS verification",
+  "projectName": "BOB Land",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Configure the React app router to serve the `.well-known` directory publicly without authentication or redirect interference. Ensure that requests to `/.well-known/*` paths (e.g., `/.well-known/ic-domains`) are passed through as static files from `frontend/public/.well-known/` without being intercepted by any route handler, auth guard, or layout wrapper.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "open well-known paths for custom domain"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A GET request to `/.well-known/ic-domains` returns the raw text content of the file without redirecting to a login page or rendering any React component.",
+        "The `.well-known` directory is served as purely static content from `frontend/public/.well-known/`.",
+        "No authentication check or layout wrapping is applied to `/.well-known/*` paths.",
+        "The existing `frontend/public/.well-known/ic-domains` file content (canister principal ID) is preserved and served correctly.",
+        "Other app routes remain unaffected."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Ensure the TanStack Router configuration in `frontend/src/App.tsx` does not define a catch-all or wildcard route that intercepts `/.well-known/*` before the static file server can handle it. If such a conflict exists, add a route exclusion or a passthrough route for `/.well-known` paths.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-5"
+        ],
+        "quotes": [
+          "open well-known paths for custom domain"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The TanStack Router does not render any component in response to `/.well-known/*` URL paths.",
+        "Static file serving for `/.well-known/ic-domains` is not blocked by any router-level redirect or 404 handler."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files under frontend/src/hooks/ (immutable paths).",
+    "Do not modify frontend/src/main.tsx (immutable path).",
+    "Do not modify frontend/src/components/ui/ (immutable path).",
+    "Preserve the existing content of frontend/public/.well-known/ic-domains exactly as-is."
+  ],
+  "nonGoals": [
+    "Adding new domain validation UI components.",
+    "Changing the canister principal ID stored in ic-domains.",
+    "Modifying backend domain validation logic.",
+    "Supporting additional .well-known file types beyond what already exists."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,135 @@
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserProfile = record {name: text;};
+type Time = int;
+type SitePublicationStatus = 
+ record {
+   isLive: bool;
+   lastPublishedAt: opt Time;
+   publicUrl: text;
+ };
+type ReviewStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+ };
+type Review = 
+ record {
+   comment: text;
+   createdAt: Time;
+   id: nat;
+   rating: nat;
+   reviewerName: text;
+   status: ReviewStatus;
+ };
+type PreOrderStatus = 
+ variant {
+   cancelled;
+   completed;
+   confirmed;
+   pending;
+ };
+type PreOrder = 
+ record {
+   contactInfo: text;
+   createdAt: Time;
+   customerName: text;
+   id: nat;
+   items: vec nat;
+   pickupTime: text;
+   status: PreOrderStatus;
+ };
+type MenuItem = 
+ record {
+   category: MenuCategory;
+   createdAt: Time;
+   description: text;
+   id: nat;
+   imagePath: opt text;
+   name: text;
+   price: nat;
+ };
+type MenuCategory = 
+ variant {
+   bobsMagic;
+   clatiteWaffles;
+   coffeeMore;
+   focacciaSpecialitati;
+   inghetataArtizanalaItaliana;
+   patiserie;
+   snacks;
+   waffleStickBombs;
+ };
+type LocationInfo = 
+ record {
+   location: text;
+   openingHours: text;
+ };
+type GalleryImage = 
+ record {
+   category: opt MenuCategory;
+   createdAt: Time;
+   description: text;
+   id: nat;
+   imagePath: text;
+   isCategoryImage: bool;
+   title: text;
+ };
+type FileReference = 
+ record {
+   hash: text;
+   path: text;
+ };
+type ContactInfo = 
+ record {
+   email: text;
+   phoneNumbers: vec text;
+ };
+service : {
+  addDefaultCategoryGalleryImages: () -> ();
+  addDefaultClatiteWafflesMenuItems: () -> ();
+  addGalleryImage: (galleryImage: GalleryImage) -> (nat);
+  addMenuItem: (menuItem: MenuItem) -> (nat);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  dropFileReference: (path: text) -> ();
+  getApprovedReviews: () -> (vec Review) query;
+  getCallerUserProfile: () -> (opt UserProfile) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCategoryGalleryImages: () -> (vec GalleryImage) query;
+  getContactInfo: () -> (ContactInfo) query;
+  getDomainValidationContent: () -> (text) query;
+  getFileReference: (path: text) -> (FileReference) query;
+  getGalleryImages: () -> (vec GalleryImage) query;
+  getGalleryImagesByCategory: (category: MenuCategory) ->
+   (vec GalleryImage) query;
+  getLocationInfo: () -> (LocationInfo) query;
+  getMenuItems: () -> (vec MenuItem) query;
+  getMenuItemsByCategory: (category: MenuCategory) -> (vec MenuItem) query;
+  getPreOrder: (id: nat) -> (opt PreOrder) query;
+  getPreOrders: () -> (vec PreOrder) query;
+  getReviews: () -> (vec Review) query;
+  getSitePublicationStatus: () -> (SitePublicationStatus) query;
+  getUserProfile: (user: principal) -> (opt UserProfile) query;
+  initializeAccessControl: () -> ();
+  isCallerAdmin: () -> (bool) query;
+  listFileReferences: () -> (vec FileReference) query;
+  moderateReview: (id: nat, status: ReviewStatus) -> ();
+  placePreOrder: (preOrder: PreOrder) -> (nat);
+  publishSite: () -> (SitePublicationStatus);
+  registerFileReference: (path: text, hash: text) -> ();
+  removeGalleryImage: (id: nat) -> ();
+  removeMenuItem: (id: nat) -> ();
+  saveCallerUserProfile: (profile: UserProfile) -> ();
+  setDomainValidationContent: (content: text) -> ();
+  submitReview: (review: Review) -> (nat);
+  updateContactInfo: (newContactInfo: ContactInfo) -> ();
+  updateGalleryImage: (id: nat, galleryImage: GalleryImage) -> ();
+  updateLocationInfo: (newLocationInfo: LocationInfo) -> ();
+  updateMenuItem: (id: nat, menuItem: MenuItem) -> ();
+  updatePreOrderStatus: (id: nat, status: PreOrderStatus) -> ();
+}

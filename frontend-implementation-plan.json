@@ -1,0 +1,45 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Open well-known paths for custom domain DNS verification",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Configure React app to serve `.well-known` directory as static files without authentication or route interference",
+      "acceptanceCriteria": [
+        "A GET request to `/.well-known/ic-domains` returns the raw text content of the file without redirecting to a login page or rendering any React component.",
+        "The `.well-known` directory is served as purely static content from `frontend/public/.well-known/`.",
+        "No authentication check or layout wrapping is applied to `/.well-known/*` paths.",
+        "The existing `frontend/public/.well-known/ic-domains` file content (canister principal ID) is preserved and served correctly.",
+        "Other app routes remain unaffected."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/vite.config.ts",
+          "operation": "modify",
+          "description": "Configure Vite to ensure that requests to `/.well-known/*` paths are served directly from `frontend/public/.well-known/` as static files without being intercepted by the development server or build process. Verify that the `publicDir` is set to 'public' and that static file serving is not blocked by middleware."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Ensure TanStack Router does not intercept `/.well-known/*` paths. Review the router configuration to confirm no catch-all or wildcard routes conflict with static file serving for `.well-known`. If necessary, document that these paths should bypass React routing entirely and be handled by the static file server."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure TanStack Router does not define routes that intercept `.well-known` paths before static file serving",
+      "acceptanceCriteria": [
+        "The TanStack Router does not render any component in response to `/.well-known/*` URL paths.",
+        "Static file serving for `/.well-known/ic-domains` is not blocked by any router-level redirect or 404 handler."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Review all route definitions in the TanStack Router configuration. Confirm that no route pattern (including catch-all routes like `*` or NotFound handlers) would match `/.well-known/*` paths. If a catch-all or 404 route exists, ensure it explicitly excludes `.well-known` paths or is configured to allow static file serving to take precedence. Document any router-level exclusions or passthrough logic needed for `.well-known` paths."
+        }
+      ]
+    }
+  ]
+}

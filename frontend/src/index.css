@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        /* Clean white background for food delivery */
+        --background: 0.99 0.01 99;
+        --foreground: 0.20 0.02 20;
+        /* Card with subtle warmth */
+        --card: 1.00 0.00 100;
+        --card-foreground: 0.20 0.02 20;
+        --popover: 1.00 0.00 100;
+        --popover-foreground: 0.20 0.02 20;
+        /* Warm orange-red primary for food delivery */
+        --primary: 0.60 0.20 25;
+        --primary-foreground: 0.99 0.01 99;
+        /* Complementary warm secondary */
+        --secondary: 0.70 0.15 35;
+        --secondary-foreground: 0.99 0.01 99;
+        /* Neutral muted */
+        --muted: 0.96 0.01 96;
+        --muted-foreground: 0.50 0.02 50;
+        /* Warm accent */
+        --accent: 0.68 0.18 30;
+        --accent-foreground: 0.99 0.01 99;
+        /* Red destructive */
+        --destructive: 0.55 0.22 15;
+        --destructive-foreground: 0.99 0.01 99;
+        /* Subtle borders */
+        --border: 0.92 0.01 92;
+        --input: 0.92 0.01 92;
+        --ring: 0.60 0.20 25;
+        /* Chart colors */
+        --chart-1: 0.60 0.20 25;
+        --chart-2: 0.70 0.15 35;
+        --chart-3: 0.68 0.18 30;
+        --chart-4: 0.65 0.16 40;
+        --chart-5: 0.75 0.12 45;
+        /* Sidebar */
+        --sidebar: 0.99 0.01 99;
+        --sidebar-foreground: 0.20 0.02 20;
+        --sidebar-primary: 0.60 0.20 25;
+        --sidebar-primary-foreground: 0.99 0.01 99;
+        --sidebar-accent: 0.96 0.01 96;
+        --sidebar-accent-foreground: 0.20 0.02 20;
+        --sidebar-border: 0.92 0.01 92;
+        --sidebar-ring: 0.60 0.20 25;
+    }
+
+    .dark {
+        /* Dark warm background */
+        --background: 0.18 0.02 18;
+        --foreground: 0.96 0.01 96;
+        /* Dark card */
+        --card: 0.22 0.02 22;
+        --card-foreground: 0.96 0.01 96;
+        --popover: 0.20 0.02 20;
+        --popover-foreground: 0.96 0.01 96;
+        /* Warm primary for dark */
+        --primary: 0.65 0.18 30;
+        --primary-foreground: 0.99 0.01 99;
+        /* Warm secondary */
+        --secondary: 0.72 0.14 38;
+        --secondary-foreground: 0.99 0.01 99;
+        /* Dark muted */
+        --muted: 0.28 0.02 28;
+        --muted-foreground: 0.72 0.01 72;
+        /* Warm accent */
+        --accent: 0.70 0.16 35;
+        --accent-foreground: 0.18 0.02 18;
+        /* Red destructive */
+        --destructive: 0.58 0.20 20;
+        --destructive-foreground: 0.99 0.01 99;
+        /* Dark borders */
+        --border: 0.30 0.02 30;
+        --input: 0.30 0.02 30;
+        --ring: 0.65 0.18 30;
+        /* Chart colors for dark */
+        --chart-1: 0.65 0.18 30;
+        --chart-2: 0.72 0.14 38;
+        --chart-3: 0.70 0.16 35;
+        --chart-4: 0.68 0.14 42;
+        --chart-5: 0.76 0.11 48;
+        /* Dark sidebar */
+        --sidebar: 0.20 0.02 20;
+        --sidebar-foreground: 0.96 0.01 96;
+        --sidebar-primary: 0.65 0.18 30;
+        --sidebar-primary-foreground: 0.99 0.01 99;
+        --sidebar-accent: 0.28 0.02 28;
+        --sidebar-accent-foreground: 0.96 0.01 96;
+        --sidebar-border: 0.30 0.02 30;
+        --sidebar-ring: 0.65 0.18 30;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Smooth transitions for professional feel */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+}

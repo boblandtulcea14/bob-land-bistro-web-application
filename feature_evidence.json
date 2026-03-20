@@ -1,0 +1,45 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-configure-the-react-app-router-to-serve-the-well-known-directory-publicly-without-authentication-or-redirect-interference-ensure-that-requests-to-well-known-paths-e-g-well-known-ic-domains-are-passed-through-as-static-files-from-frontend-public-well-known-without-being-intercepted-by-any-route-handler-auth-guard-or-layout-wrapper",
+      "featureTitle": "Configure the React app router to serve the `.well-known` directory publicly without authentication or redirect interference. Ensure that requests to `/.well-known/*` paths (e.g., `/.well-known/ic-domains`) are passed through as static files from `frontend/public/.well-known/` without being intercepted by any route handler, auth guard, or layout wrapper.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@1.0.1",
+        "blob-storage@1.1.2",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-tanstack-router-configuration-in-frontend-src-app-tsx-does-not-define-a-catch-all-or-wildcard-route-that-intercepts-well-known-before-the-static-file-server-can-handle-it-if-such-a-conflict-exists-add-a-route-exclusion-or-a-passthrough-route-for-well-known-paths",
+      "featureTitle": "Ensure the TanStack Router configuration in `frontend/src/App.tsx` does not define a catch-all or wildcard route that intercepts `/.well-known/*` before the static file server can handle it. If such a conflict exists, add a route exclusion or a passthrough route for `/.well-known` paths.",
+      "files": [
+        "frontend/src/App.tsx"
+      ],
+      "components": [
+        "authorization@1.0.1",
+        "blob-storage@1.1.2",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Project involves a web application with custom domain DNS verification support, including handling .well-known paths.",
+  "architectural_notes": [
+    "Custom domain support requires serving .well-known paths for DNS validation"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-configure-the-react-app-router-to-serve-the-well-known-directory-publicly-without-authentication-or-redirect-interference-ensure-that-requests-to-well-known-paths-e-g-well-known-ic-domains-are-passed-through-as-static-files-from-frontend-public-well-known-without-being-intercepted-by-any-route-handler-auth-guard-or-layout-wrapper",
+      "title": "Configure the React app router to serve the `.well-known` directory publicly without authentication or redirect interference. Ensure that requests to `/.well-known/*` paths (e.g., `/.well-known/ic-domains`) are passed through as static files from `frontend/public/.well-known/` without being intercepted by any route handler, auth guard, or layout wrapper.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-tanstack-router-configuration-in-frontend-src-app-tsx-does-not-define-a-catch-all-or-wildcard-route-that-intercepts-well-known-before-the-static-file-server-can-handle-it-if-such-a-conflict-exists-add-a-route-exclusion-or-a-passthrough-route-for-well-known-paths",
+      "title": "Ensure the TanStack Router configuration in `frontend/src/App.tsx` does not define a catch-all or wildcard route that intercepts `/.well-known/*` before the static file server can handle it. If such a conflict exists, add a route exclusion or a passthrough route for `/.well-known` paths.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Implement .well-known path handling for custom domain DNS verification",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "BOB Land",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
